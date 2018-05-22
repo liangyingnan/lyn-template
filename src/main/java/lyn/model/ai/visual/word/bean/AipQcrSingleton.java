@@ -54,7 +54,7 @@ public class AipQcrSingleton {
 
 	/********************************饿汉式***********************************/
 
-	private static final AipOcr aipOcr = new AipOcr(AiConstant.BaiDu_App_Id,AiConstant.BaiDu_API_Key,AiConstant.BaiDu_Secret_Key);
+	private static final AipOcr aipOcr = new AipOcr(AiConstant.BAIDU_APP_ID,AiConstant.BAIDU_API_KEY,AiConstant.BAIDU_SECRET_KEY);
 
 	public static AipOcr getInstance() {
 		return aipOcr;

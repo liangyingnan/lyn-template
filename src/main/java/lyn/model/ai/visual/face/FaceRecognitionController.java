@@ -28,8 +28,8 @@ public class FaceRecognitionController {
 
 	public static void main(String[] args) throws Exception {
 		String filePath ="D:/1.jpg";
-		System.out.println(AiConstant.BaiDu_Access_Token);
-		String result = faceDetect(filePath,"1", AiConstant.BaiDu_Access_Token);
+		System.out.println(AiConstant.BAIDU_ACCESS_TOKEN);
+		String result = faceDetect(filePath,"1", AiConstant.BAIDU_ACCESS_TOKEN);
 		JSON json = JSON.parseObject(result);
 		System.out.println(json.toString());
 		FaceDetectBean bean = com.alibaba.fastjson.JSONObject.toJavaObject(json, FaceDetectBean.class);
