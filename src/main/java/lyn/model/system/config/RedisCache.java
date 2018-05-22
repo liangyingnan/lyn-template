@@ -7,6 +7,7 @@ import org.springframework.util.SerializationUtils;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Title:
@@ -37,7 +38,7 @@ public class RedisCache<K,V> implements Cache<K,V> {
 	 * 通过源码我们可以发现，shiro需要的key的类型为Object，V的类型为AuthorizationInfo对象
 	 */
 	@Override
-	public V get(K k) throws CacheException {
+	public V get(K key) throws CacheException {
 		V obj =redisTemplate.opsForValue().get(name+new String(SerializationUtils.serialize(getCacheKey(key))));
 		if(obj!=null)
 		{
@@ -48,17 +49,22 @@ public class RedisCache<K,V> implements Cache<K,V> {
 
 	@Override
 	public V put(K k, V v) throws CacheException {
-		return null;
+		redisTemplate.opsForValue().set(name+new String(SerializationUtils.serialize(getCacheKey(k))), v, this.expireTime, TimeUnit.SECONDS);
+		return v;
 	}
 
 	@Override
 	public V remove(K k) throws CacheException {
-		return null;
+		V v = redisTemplate.opsForValue().get(name+new String(SerializationUtils.serialize(getCacheKey(k))));
+		redisTemplate.opsForValue().getOperations().delete(name+new String(SerializationUtils.serialize(getCacheKey(k))));
+
+		System.out.println("====removeremove========="+k+"===============");
+		return v;
 	}
 
 	@Override
 	public void clear() throws CacheException {
-
+		System.out.println("清除缓存");
 	}
 
 	@Override
@@ -74,6 +80,10 @@ public class RedisCache<K,V> implements Cache<K,V> {
 	@Override
 	public Collection<V> values() {
 		return null;
+	}
+
+	private String getCacheKey(Object key) {
+		return "shiro-cache" +  ":" + key;
 	}
 
 }
