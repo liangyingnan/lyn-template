@@ -2,6 +2,7 @@ package lyn.model.common.dao;
 
 import lyn.model.common.domain.TaskDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  * @date 2017-10-03 15:45:42
  */
 @Mapper
+@Component
 public interface TaskDao {
 
 	TaskDO get(Long id);
