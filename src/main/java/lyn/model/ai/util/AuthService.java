@@ -27,9 +27,9 @@ public class AuthService {
 	 */
 	public static String getAuth() {
 		// 官网获取的 API Key 更新为你注册的
-		String clientId = AiConstant.BaiDu_API_Key;
+		String clientId = AiConstant.BAIDU_API_KEY;
 		// 官网获取的 Secret Key 更新为你注册的
-		String clientSecret = AiConstant.BaiDu_Secret_Key;
+		String clientSecret = AiConstant.BAIDU_SECRET_KEY;
 		return getAuth(clientId, clientSecret);
 	}
 
